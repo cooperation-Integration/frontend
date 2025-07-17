@@ -22,7 +22,6 @@ function LoginPage() {
         try {
             const res = await axios.post("/api/users/login", formData);
             alert("로그인 성공!");
-            // accessToken 저장 (필요 시 localStorage로 대체 가능)
             sessionStorage.setItem("accessToken", res.data.data.accessToken);
             navigate("/");
         } catch (err) {
@@ -57,6 +56,7 @@ function LoginPage() {
             </form>
 
             <hr />
+
             <div>
                 <button onClick={() => window.location.href = 'http://localhost:8080/oauth2/authorization/kakao'}>
                     카카오 로그인
@@ -65,6 +65,19 @@ function LoginPage() {
                 <button onClick={() => window.location.href = 'http://localhost:8080/oauth2/authorization/google'}>
                     구글 로그인
                 </button>
+            </div>
+
+            <hr />
+
+            <div>
+                <p>계정이 없으신가요?</p>
+                <button onClick={() => navigate("/register")}>회원가입</button>
+                <br /><br />
+
+                <p>이메일 또는 비밀번호를 잊으셨나요?</p>
+                <button onClick={() => navigate("/find-email")}>이메일 찾기</button>
+                <br />
+                <button onClick={() => navigate("/find-password")}>비밀번호 찾기</button>
             </div>
         </div>
     );
